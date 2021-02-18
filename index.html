@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>d3.js data driven page</title>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+    </head>
+
+    <style>
+      body {background-color: rgb(241, 226, 221);text-align:center;}
+        .titulo {
+        font-size: 25px;
+        font-family: "Verdana";
+        color: #2c4792;
+        text-shadow: 0.5px 0.7px black;
+        margin: 20px;
+        text-align: center;
+        }
+        .second{
+font-size: 18px;
+font-family: "Verdana";
+color: #1b3b1d;
+text-shadow: 0.5px 0.2px rgb(91, 165, 147);
+margin: 10px;
+text-align: center;
+}
+.third{
+font-size: 13px;
+font-family: "Verdana";
+color: #5020d1;
+margin: 5px;
+text-align: center;
+}
+th {
+  color: black;
+}
+p {
+  color: black; font-size: medium;
+}
+.name { color: black;
+border: solid rgb(56, 47, 54) 1pt;
+}
+.x {
+  color: black;
+border: solid rgb(235, 108, 108) 1pt;
+}
+            
+.y {
+ color: black;
+ border: solid rgb(221, 131, 131) 1pt;
+}
+            
+.length {
+                color: black;
+                border: solid rgb(89, 189, 132) 1pt;
+            }
+            
+            .height {
+                color: black;
+                border: solid rgb(89, 189, 132) 1pt;
+            }
+            
+            .color {
+                color: black;
+                border: solid rgb(89, 189, 132) 1pt;
+            }
+            
+            
+    </style>
+
+    <body>
+
+      <div class="titulo">
+        DATA TIDYING AND REPORTING
+        </div>
+        <br>
+        <div class="second">
+            AMALIA JIMENEZ TOLEDANO
+        </div>
+        <br>
+        <div class="third">
+            100446255@alumnos.uc3m.es
+        </div>
+        
+        <div class="second">
+          Second Assignment-Part 2
+        </div>
+
+        <select id="selectBox" class="third" onChange="select()">
+            <option selected disabled>Select Table</option>
+            <option value="1">Data1</option>
+            <option value="2">Data2</option>
+           </select>
+           
+            <table ></table>
+
+
+        <script>
+
+             function remove(){
+                
+                d3.selectAll("table").remove() 
+            }
+            
+            function select() { 
+              d3.selectAll("table").remove() 
+                if(document.getElementById("selectBox").value=="1"){
+                    csv_url_1 = false ? "category-brands.csv" : "https://raw.githubusercontent.com/amaliajimenezajt/dinamic_table_data/main/data1.csv"
+                  d3.csv(csv_url_1,
+                  (d,i,c) => {
+                    cs = {
+                            "name":"Name",
+                            "x": "variable1",
+                            "y":"variable2",
+        
+                        }
+                        if (i==0) {
+                            d3.select("body").insert("table")
+                            .append("tr")
+                            .selectAll("th")
+                            .data(c).enter()
+                            .append("th").text(e => cs[e])
+                        }
+                        d3.select("table")
+                        .append("tr")
+                        .selectAll("td")
+                        .data(c).enter()
+                        .append("td")
+                        .text(e => d[e])
+                        .attr("class", e => e)
+                    })
+
+                }  else if(document.getElementById("selectBox").value=="2") {
+                      csv_url_2 = false ? "category-brands.csv" : "https://raw.githubusercontent.com/amaliajimenezajt/dinamic_table_data/main/data2.csv"
+                     d3.csv(csv_url_2,
+                     (d,i,c) => {
+                      cs = {
+                            "name":"name",
+                            "length": "length",
+                            "height":"height",
+                            "color": "color"
+                        }
+                        if (i==0) {
+                            d3.select("body").insert("table")
+                            .append("tr")
+                            .selectAll("th")
+                            .data(c).enter()
+                            .append("th").text(e => cs[e])
+                        }
+                        d3.select("table")
+                        .append("tr")
+                        .selectAll("td")
+                        .data(c).enter()
+                        .append("td")
+                        .text(e => d[e])
+                        .attr("class", e => e)
+                    })
+        }
+    }
+
+    
+
+            
+        </script>
+
+        
+    </body>
+</html>
+
+
+
+
+
+
+
